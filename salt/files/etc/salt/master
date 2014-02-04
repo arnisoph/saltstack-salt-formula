@@ -1,0 +1,8 @@
+{% from "salt/map.jinja" import salt_map with context -%}
+{# Idea of defining a macro stolen from https://github.com/saltstack-formulas/salt-formula/ -#}
+{%- macro set_setting(settingname) -%}
+{%- if settingname in salt_map['master']['config'] -%}
+{{ settingname }}: {{ salt_map['master']['config'][settingname] }}
+{%- endif -%}
+{%- endmacro -%}
+{{ set_setting('mysql.default_file') }}

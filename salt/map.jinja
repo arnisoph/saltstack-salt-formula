@@ -1,0 +1,27 @@
+{% set salt_map = salt['grains.filter_by'](
+  {
+    'Debian': {
+      'manage_saltrepo': True,
+      'repo_url': 'http://debian.saltstack.com/debian',
+      'repo_dist': salt['grains.get']('oscodename') ~ '-saltstack',
+      'repo_comps': 'main',
+      'repo_keyurl': 'http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key',
+      'minion': {
+        'pkgs': [
+          'salt-minion',
+        ],
+        'config': {
+        },
+      },
+      'master': {
+        'pkgs': [
+          'salt-master',
+        ],
+        'config': {
+        },
+      },
+    },
+  }
+, merge=salt['pillar.get']('salt:lookup')) %}
+
+{#- TODO deliver key via salt fileserver instead via Internet HTTP? -#}

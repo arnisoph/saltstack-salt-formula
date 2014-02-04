@@ -1,0 +1,13 @@
+salt:
+  lookup:
+    master:
+    minion:
+      pkgs:
+        - salt-minion
+{% if salt['grains.get']['os'] == 'Debian' %}
+        - python-mysqldb
+        - python-apt
+        - lsb-release
+{% endif %}
+      config:
+        mysql.default_file: /etc/mysql/salt-minion.cnf
