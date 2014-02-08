@@ -19,11 +19,11 @@ salt-minion:
 
 /etc/salt/minion:
   file:
-    - managed
-    - source: salt://salt/files/etc/salt/minion
+    - serialize
+    - dataset: {% if salt_map['minion']['config'] is defined %}{{ salt_map['minion']['config'] }}{% endif %}
+    - formatter: YAML
     - mode: '0600'
     - user: root
     - group: root
-    - template: jinja
     - require:
       - pkg: salt-minion

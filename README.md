@@ -1,6 +1,6 @@
 # salt-formula
 
-Salt Stack Formula to set up and configure the Salt Stack itself
+Salt Stack Formula to set up and configure the central system and configuration manager Salt Stack itself
 
 ## TODO
 

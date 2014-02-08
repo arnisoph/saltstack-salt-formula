@@ -6,18 +6,17 @@
       'repo_dist': salt['grains.get']('oscodename') ~ '-saltstack',
       'repo_comps': 'main',
       'repo_keyurl': 'http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key',
-      'minion': {
-        'pkgs': [
-          'salt-minion',
-        ],
-        'config': {
-        },
-      },
       'master': {
         'pkgs': [
           'salt-master',
         ],
-        'config': {
+      },
+      'minion': {
+        'pkgs': [
+          'salt-minion',
+        ],
+        'configf': {
+          'Dummy': False
         },
       },
     },
