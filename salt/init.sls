@@ -1,4 +1,4 @@
-{% import_yaml "salt/defaults.yaml" as rawmap %}
+{% from "salt/defaults.yaml" import rawmap with context %}
 {% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('salt:lookup')) %}
 
 {% if datamap['manage_saltrepo'] %}

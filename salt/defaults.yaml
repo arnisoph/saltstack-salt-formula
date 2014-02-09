@@ -1,7 +1,8 @@
+{% load_yaml as rawmap %}
 Debian:
   manage_saltrepo: True
   repo_url: http://debian.saltstack.com/debian
-  repo_dist: salt['grains.get']('oscodename') ~ '-saltstack',
+  repo_dist: {{ salt['grains.get']('oscodename') }}-saltstack
   repo_comps: main
   repo_keyurl: http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key
   master:
@@ -12,6 +13,6 @@ Debian:
       - salt-minion
     configf:
       Dummy: False
+{% endload %}
 
-
-#TODO deliver key via salt fileserver instead via Internet HTTP?
+{# TODO deliver key via salt fileserver instead over the Internet? #}
