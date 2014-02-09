@@ -1,13 +1,14 @@
+{% import_yaml "salt/defaults.yaml" as rawmap %}
+{% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('salt:lookup')) %}
+
 include:
   - salt
-
-{% from "salt/map.jinja" import salt_map with context %}
 
 salt-master:
   pkg:
     - installed
     - pkgs:
-{% for pkg in salt_map['master']['pkgs'] %}
+{% for pkg in datamap['master']['pkgs'] %}
       - {{ pkg }}
 {% endfor %}
   service:
@@ -20,7 +21,7 @@ salt-master:
 /etc/salt/master:
   file:
     - serialize
-    - dataset: {% if salt_map['master']['config'] is defined %}{{ salt_map['master']['config'] }}{% endif %}
+    - dataset: {% if datamap['master']['config'] is defined %}{{ datamap['master']['config'] }}{% endif %}
     - formatter: YAML
     - mode: '0600'
     - user: root
