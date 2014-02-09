@@ -1,0 +1,17 @@
+Debian:
+  manage_saltrepo: True
+  repo_url: http://debian.saltstack.com/debian
+  repo_dist: salt['grains.get']('oscodename') ~ '-saltstack',
+  repo_comps: main
+  repo_keyurl: http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key
+  master:
+    pkgs:
+      - salt-master
+  minion:
+    pkgs:
+      - salt-minion
+    configf:
+      Dummy: False
+
+
+#TODO deliver key via salt fileserver instead via Internet HTTP?
