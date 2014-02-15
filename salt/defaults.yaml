@@ -11,8 +11,6 @@ Debian:
   minion:
     pkgs:
       - salt-minion
-    configf:
-      Dummy: False
 {% endload %}
 
 {# TODO deliver key via salt fileserver instead over the Internet? #}
