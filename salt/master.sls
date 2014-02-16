@@ -13,9 +13,12 @@ salt-master:
 {% endfor %}
   service:
     - running
+    - name: {{ datamap['master']['service']['name'] }}
+    - enable: {{ datamap['master']['service']['enable'] }}
     - watch:
       - file: /etc/salt/master
     - require:
+      - pkg: salt-master
       - file: /etc/salt/master
 
 /etc/salt/master:

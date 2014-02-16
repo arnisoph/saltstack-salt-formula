@@ -13,9 +13,12 @@ salt-minion:
 {% endfor %}
   service:
     - running
+    - name: {{ datamap['minion']['service']['name'] }}
+    - enable: {{ datamap['minion']['service']['enable'] }}
     - watch:
       - file: /etc/salt/minion
     - require:
+      - pkg: salt-minion
       - file: /etc/salt/minion
 
 /etc/salt/minion:
