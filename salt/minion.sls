@@ -24,9 +24,10 @@ salt-minion:
 /etc/salt/minion:
   file:
     - serialize
-    - dataset: {% if datamap['minion']['config'] is defined %}{{ datamap['minion']['config'] }}{% endif %}
+    - dataset:
+        {{ datamap['minion']['config']|default({}) }}
     - formatter: YAML
-    - mode: '0600'
+    - mode: 600
     - user: root
     - group: root
     - require:
