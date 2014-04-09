@@ -15,6 +15,9 @@ salt:
         pillar_roots:
           base:
             - /srv/salt/pillar
+
+        ext_pillar:
+         - git: master git@host:/srv/path/saltpillar.git
     minion:
       pkgs:
         - salt-minion
