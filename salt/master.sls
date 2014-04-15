@@ -23,11 +23,12 @@ salt-master:
 
 /etc/salt/master:
   file:
-    - serialize
-    - dataset: {% if datamap['master']['config'] is defined %}{{ datamap['master']['config'] }}{% endif %}
-    - formatter: YAML
+    #- serialize
+    #- dataset: {# if datamap['master']['config'] is defined #}{# datamap['master']['config'] #}{# endif #}
+    #- formatter: YAML
     - mode: '0600'
     - user: root
     - group: root
+    - contents_pillar: salt:lookup:master:config
     - require:
       - pkg: salt-master

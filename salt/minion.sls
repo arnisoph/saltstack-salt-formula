@@ -23,12 +23,14 @@ salt-minion:
 
 /etc/salt/minion:
   file:
-    - serialize
-    - dataset:
-        {{ datamap['minion']['config']|default({}) }}
-    - formatter: YAML
+    #- serialize
+    #- dataset:
+    #     datamap['minion']['config']|default({})
+    #- formatter: YAML
+    - managed
     - mode: 600
     - user: root
     - group: root
+    - contents_pillar: salt:lookup:minion:config
     - require:
       - pkg: salt-minion
