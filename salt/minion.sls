@@ -8,13 +8,13 @@ salt-minion:
   pkg:
     - installed
     - pkgs:
-{% for pkg in datamap['minion']['pkgs'] %}
+{% for pkg in datamap.minion.pkgs %}
       - {{ pkg }}
 {% endfor %}
   service:
     - running
-    - name: {{ datamap['minion']['service']['name'] }}
-    - enable: {{ datamap['minion']['service']['enable'] }}
+    - name: {{ datamap.minion.service.name }}
+    - enable: {{ datamap.minion.service.enable }}
     - watch:
       - file: /etc/salt/minion
     - require:
@@ -32,5 +32,3 @@ salt-minion:
     - user: root
     - group: root
     - contents_pillar: salt:lookup:minion:config
-    - require:
-      - pkg: salt-minion

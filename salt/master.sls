@@ -8,13 +8,13 @@ salt-master:
   pkg:
     - installed
     - pkgs:
-{% for pkg in datamap['master']['pkgs'] %}
+{% for pkg in datamap.master.pkgs %}
       - {{ pkg }}
 {% endfor %}
   service:
     - running
-    - name: {{ datamap['master']['service']['name'] }}
-    - enable: {{ datamap['master']['service']['enable'] }}
+    - name: {{ datamap.master.service.name }}
+    - enable: {{ datamap.master.service.enable }}
     - watch:
       - file: /etc/salt/master
     - require:
@@ -26,9 +26,8 @@ salt-master:
     #- serialize
     #- dataset: {# if datamap['master']['config'] is defined #}{# datamap['master']['config'] #}{# endif #}
     #- formatter: YAML
-    - mode: '0600'
+    - managed
+    - mode: 600
     - user: root
     - group: root
     - contents_pillar: salt:lookup:master:config
-    - require:
-      - pkg: salt-master
