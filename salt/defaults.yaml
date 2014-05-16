@@ -17,6 +17,20 @@ Debian:
     service:
       name: salt-minion
       enable: True
+RedHat:
+  manage_saltrepo: False
+  master:
+    pkgs:
+      - salt-master
+    service:
+      name: salt-master
+      enable: True
+  minion:
+    pkgs:
+      - salt-minion
+    service:
+      name: salt-minion
+      enable: True
 {% endload %}
 
 {# TODO deliver key via salt fileserver instead over the Internet? #}
