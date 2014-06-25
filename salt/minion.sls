@@ -4,13 +4,14 @@
 include:
   - salt
 
-salt-minion:
+salt_minion:
+{% if datamap.minion.pkgs|length > 0 %}
   pkg:
     - installed
-    - pkgs:
-{% for pkg in datamap.minion.pkgs %}
-      - {{ pkg }}
-{% endfor %}
+    - pkgs: {{ datamap.minion.pkgs }}
+    - require_in:
+      - service: salt_minion
+{% endif %}
   service:
     - running
     - name: {{ datamap.minion.service.name }}
@@ -18,7 +19,6 @@ salt-minion:
     - watch:
       - file: /etc/salt/minion
     - require:
-      - pkg: salt-minion
       - file: /etc/salt/minion
 
 /etc/salt/minion:
