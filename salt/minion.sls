@@ -8,17 +8,15 @@ salt_minion:
 {% if datamap.minion.pkgs|length > 0 %}
   pkg:
     - installed
-    - pkgs: {{ datamap.minion.pkgs }}
+    - pkgs: {{ datamap.minion.pkgs|default(['salt-minion']) }}
     - require_in:
       - service: salt_minion
 {% endif %}
   service:
     - running
-    - name: {{ datamap.minion.service.name }}
-    - enable: {{ datamap.minion.service.enable }}
+    - name: {{ datamap.minion.service.name|default('salt-minion') }}
+    - enable: {{ datamap.minion.service.enable|default(True) }}
     - watch:
-      - file: /etc/salt/minion
-    - require:
       - file: /etc/salt/minion
 
 /etc/salt/minion:

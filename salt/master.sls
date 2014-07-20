@@ -4,21 +4,15 @@
 include:
   - salt
 
-salt-master:
+salt_master:
   pkg:
     - installed
-    - pkgs:
-{% for pkg in datamap.master.pkgs %}
-      - {{ pkg }}
-{% endfor %}
+    - pkgs: {{ datamap.master.pkgs|default(['salt-master']) }}
   service:
     - running
-    - name: {{ datamap.master.service.name }}
-    - enable: {{ datamap.master.service.enable }}
+    - name: {{ datamap.master.service.name|default('salt-master') }}
+    - enable: {{ datamap.master.service.enable|default(True) }}
     - watch:
-      - file: /etc/salt/master
-    - require:
-      - pkg: salt-master
       - file: /etc/salt/master
 
 /etc/salt/master:
