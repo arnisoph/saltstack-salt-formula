@@ -20,15 +20,11 @@ salt_minion:
     - enable: {{ datamap.minion.service.enable|default(True) }}
     - watch:
       - file: /etc/salt/minion
-
-/etc/salt/minion:
   file:
-    #- serialize
-    #- dataset:
-    #     datamap['minion']['config']|default({})
-    #- formatter: YAML
-    - managed
+    - serialize
+    - name: /etc/salt/minion
+    - dataset: {{ datamap.minion.config|json }}
+    - formatter: JSON
     - mode: 600
     - user: root
     - group: root
-    - contents_pillar: salt:lookup:minion:config

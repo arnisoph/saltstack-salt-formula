@@ -16,14 +16,11 @@ salt_master:
     - enable: {{ datamap.master.service.enable|default(True) }}
     - watch:
       - file: /etc/salt/master
-
-/etc/salt/master:
   file:
-    #- serialize
-    #- dataset: {# if datamap['master']['config'] is defined #}{# datamap['master']['config'] #}{# endif #}
-    #- formatter: YAML
-    - managed
+    - serialize
+    - name: /etc/salt/master
+    - dataset: {{ datamap.master.config|default({})|json }}
+    - formatter: JSON
     - mode: 600
     - user: root
     - group: root
-    - contents_pillar: salt:lookup:master:config

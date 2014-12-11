@@ -2,6 +2,9 @@
 salt-formula
 ============
 
+.. image:: https://api.flattr.com/button/flattr-badge-large.png
+    :target: https://flattr.com/submit/auto?user_id=bechtoldt&url=https%3A%2F%2Fgithub.com%2Fbechtoldt%2Fsaltstack-salt-formula
+
 Salt Stack Formula to set up and configure the central system and configuration manager Salt Stack itself
 
 NOTICE BEFORE YOU USE
@@ -14,6 +17,7 @@ TODO
 
 * minion/ master: Provide more flexible setting of configuration?
 * master: create salt tree (for states and pillar)
+* manage autosign file
 
 Instructions
 ============
@@ -42,6 +46,10 @@ Installs and configures a master
 ---------------
 Installs and configures a minion
 
+``salt.syndic``
+---------------
+Installs the syndic component
+
 Additional resources
 ====================
 
@@ -67,7 +75,7 @@ Salt Compatibility
 
 Tested with:
 
-* 2014.1.x
+* 2014.7
 
 OS Compatibility
 ================
@@ -76,3 +84,4 @@ Tested with:
 
 * GNU/ Linux Debian Wheezy
 * CentOS 6
+* CentOS 7

@@ -5,17 +5,30 @@ Debian:
   repo_comps: main
   repo_keyurl: http://debian.saltstack.com/debian-salt-team-joehealy.gpg.key
   master:
-    pkgs: []
+    pkgs:
+      - salt-master
+      - python-git
     service: {}
   minion:
-    pkgs: []
+    pkgs:
+      - salt-minion
+    service: {}
+  syndic:
+    pkgs:
+      - salt-syndic
     service: {}
 RedHat:
   master:
-    pkgs: []
+    pkgs:
+      - salt-master
     service: {}
   minion:
-    pkgs: []
+    pkgs:
+      - salt-minion
+    service: {}
+  syndic:
+    pkgs:
+      - salt-syndic
     service: {}
 {% endload %}
 
