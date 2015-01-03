@@ -23,7 +23,7 @@ salt_minion:
   file:
     - serialize
     - name: /etc/salt/minion
-    - dataset: {{ datamap.minion.config|json }}
+    - dataset: {{ datamap.minion.config|default({})|json }}
     - formatter: JSON
     - mode: 600
     - user: root
