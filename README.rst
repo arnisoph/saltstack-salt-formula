@@ -18,6 +18,7 @@ TODO
 * minion/ master: Provide more flexible setting of configuration?
 * master: create salt tree (for states and pillar)
 * manage autosign file
+* rewrite using py renderer
 
 Instructions
 ============
@@ -85,10 +86,3 @@ Tested with:
 * GNU/ Linux Debian Wheezy
 * CentOS 6
 * CentOS 7
-
-AUTHORS
-=======
-
-Please add yourself too when contributing (sorted alphabetically)!
-
-* Arnold Bechtoldt <mail@arnoldbechtoldt.com>

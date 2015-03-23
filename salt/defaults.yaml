@@ -8,10 +8,31 @@ Debian:
     pkgs:
       - salt-master
       - python-git
+      - python-apt
+      - python-mysqldb
+      - lsb-release
+    config:
+      manage:
+        - master
+      master:
+        path: /etc/salt/master
+        mode: 600
+        dataset_pillar: salt:lookup:master:config:master:config
     service: {}
   minion:
     pkgs:
       - salt-minion
+      - python-git
+      - python-apt
+      - python-mysqldb
+      - lsb-release
+    config:
+      manage:
+        - minion
+      minion:
+        path: /etc/salt/minion
+        mode: 600
+        dataset_pillar: salt:lookup:minion:config:minion:config
     service: {}
   syndic:
     pkgs:
@@ -21,10 +42,24 @@ RedHat:
   master:
     pkgs:
       - salt-master
+    config:
+      manage:
+        - master
+      master:
+        path: /etc/salt/master
+        mode: 600
+        dataset_pillar: salt:lookup:master:config:master:config
     service: {}
   minion:
     pkgs:
       - salt-minion
+    config:
+      manage:
+        - minion
+      minion:
+        path: /etc/salt/minion
+        mode: 600
+        dataset_pillar: salt:lookup:minion:config:minion:config
     service: {}
   syndic:
     pkgs:

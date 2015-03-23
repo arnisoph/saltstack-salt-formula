@@ -18,13 +18,31 @@ salt_minion:
     - running
     - name: {{ datamap.minion.service.name|default('salt-minion') }}
     - enable: {{ datamap.minion.service.enable|default(True) }}
-    - watch:
-      - file: /etc/salt/minion
+
+{% for c in datamap.minion.config.manage|default([]) %}
+  {% set f = datamap['minion']['config'][c]|default({}) %}
+salt_minion_config_{{ c }}:
   file:
-    - serialize
-    - name: /etc/salt/minion
-    - dataset: {{ datamap.minion.config|default({})|json }}
-    - formatter: JSON
-    - mode: 600
+    - {{ f.ensure|default('serialize') }}
+    - name: {{ f.path }}
+  {% if 'template_path' in f %}
+    - source: {{ f.template_path }}
+  {% endif %}
+    - mode: {{ f.mode|default(644) }}
     - user: root
     - group: root
+  {% if 'template' in f %}
+    - template: {{ f.template }}
+  {% endif %}
+  {% if 'contents' in f %}
+    - contents: {{ f.contents }}
+  {% endif %}
+  {% if 'dataset_pillar' in f %}
+    - dataset_pillar: {{ f.dataset_pillar }}
+  {% endif %}
+  {% if f.ensure|default('serialize') == 'serialize' %}
+    - formatter: {{ f.formatter|default('json') }}
+  {% endif %}
+    - watch_in:
+      - service: salt_minion
+{% endfor %}
