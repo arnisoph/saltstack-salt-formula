@@ -1,0 +1,68 @@
+kernel:
+  Linux:
+    master:
+      pkgs:
+        - salt-master
+      config:
+        manage:
+          - master
+        master:
+          path: /etc/salt/master
+          mode: 600
+          dataset_pillar: salt:lookup:master:config:master:config
+      service:
+        name: salt-master
+    minion:
+      pkgs:
+        - salt-minion
+      config:
+        manage:
+          - minion
+        minion:
+          path: /etc/salt/minion
+          mode: 600
+          dataset_pillar: salt:lookup:minion:config:minion:config
+      service:
+        name: salt-minion
+    syndic:
+      pkgs:
+        - salt-syndic
+      service:
+        name: salt-syndic
+    cloud:
+      config:
+        manage:
+          - cloud_providers
+          - cloud_profiles
+        cloud_providers:
+          path: /etc/salt/cloud.providers
+          mode: 600
+          dataset_pillar: cloud:providers
+        cloud_profiles:
+          path: /etc/salt/cloud.profiles
+          mode: 600
+          dataset_pillar: cloud:profiles
+    ssh:
+      config:
+        manage:
+          - roster
+        roster:
+          path: /etc/salt/roster
+          mode: 600
+          dataset_pillar: salt:lookup:ssh:config:roster:config
+os_family:
+  Debian:
+    master:
+      pkgs:
+        - salt-master
+        - python-git
+        - python-apt
+        - python-mysqldb
+        - lsb-release
+    minion:
+      pkgs:
+        - salt-minion
+        - python-git
+        - python-apt
+        - python-mysqldb
+        - lsb-release

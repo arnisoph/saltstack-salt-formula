@@ -1,5 +1,8 @@
 [Unreleased] ([unreleased])
 ---------------------------
+* update formula structure
+* add salt-cloud and salt-ssh support
+* rewrite using the py renderer
 
 v0.4 (2015-03-23)
 -----------------
