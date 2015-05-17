@@ -3,6 +3,7 @@
 * update formula structure
 * add salt-cloud and salt-ssh support
 * rewrite using the py renderer
+* manage minion_id by default, add more options for file deployment
 
 v0.4 (2015-03-23)
 -----------------

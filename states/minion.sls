@@ -50,6 +50,12 @@ def run():
             attrs.append(dict({'template': f.get('template')}))
         if 'contents' in f:
             attrs.append(dict({'contents': f.get('contents')}))
+        if 'contents_grain' in f:
+            attrs.append(dict({'contents': __salt__['grains.get'](f.get('contents_grain'), {})}))
+        if 'contents_pillar' in f:
+            attrs.append(dict({'contents_pillar': f.get('contents_pillar')}))
+        if 'dataset_grain' in f:
+            attrs.append(dict({'dataset': __salt__['grains.get'](f.get('dataset_grain'), {})}))
         if 'dataset_pillar' in f:
             attrs.append(dict({'dataset_pillar': f.get('dataset_pillar')}))
 

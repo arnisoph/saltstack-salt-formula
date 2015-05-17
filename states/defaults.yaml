@@ -18,10 +18,15 @@ kernel:
       config:
         manage:
           - minion
+          - minion_id
         minion:
           path: /etc/salt/minion
           mode: 600
           dataset_pillar: salt:lookup:minion:config:minion:config
+        minion_id:
+          ensure: managed
+          path: /etc/salt/minion_id
+          contents_grain: id
       service:
         name: salt-minion
     syndic:
