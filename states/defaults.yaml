@@ -37,8 +37,13 @@ kernel:
     cloud:
       config:
         manage:
+          - cloud
           - cloud_providers
           - cloud_profiles
+        cloud:
+          path: /etc/salt/cloud
+          mode: 600
+          dataset_pillar: salt:lookup:cloud:config:cloud:config
         cloud_providers:
           path: /etc/salt/cloud.providers
           mode: 600
