@@ -1,4 +1,4 @@
-{% if data['id'] != salt['grains.get']('fqdn') %}
+{% if data['id'] != salt['grains.get']('fqdn') or data['fun'] != 'cmd.run' %}
 log_minion_new_job:
   local.cmd.run:
     - name: log minion job
