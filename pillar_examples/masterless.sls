@@ -1,7 +1,7 @@
 salt:
   lookup:
     minion:
-      pkgs: []
+      pkgs: False
       config:
         minion:
           config:

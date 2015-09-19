@@ -15,7 +15,7 @@ def run():
     config['extend'] = datamap.get('minion', {}).get('sls_extend', {})
 
     # State salt_minion_pkgs
-    if len(datamap['minion']['pkgs']) > 0:
+    if datamap['minion']['pkgs']:
         attrs = [
             {'pkgs': datamap['minion']['pkgs']},
             {'require_in': [{'service': 'salt_minion_service'}]},

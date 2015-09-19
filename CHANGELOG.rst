@@ -4,6 +4,7 @@
 * add salt-cloud and salt-ssh support
 * rewrite using the py renderer
 * manage minion_id by default, add more options for file deployment
+* Salt 2015.8 supports deep merge of lists, fix incompatible code
 
 v0.4 (2015-03-23)
 -----------------

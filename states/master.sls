@@ -15,7 +15,7 @@ def run():
     config['extend'] = datamap.get('master', {}).get('sls_extend', {})
 
     # State salt_master_pkgs
-    if len(datamap['master']['pkgs']) > 0:
+    if datamap['master']['pkgs']:
         attrs = [
             {'pkgs': datamap['master']['pkgs']},
             {'require_in': [{'service': 'salt_master_service'}]},

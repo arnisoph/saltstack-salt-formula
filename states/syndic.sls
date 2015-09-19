@@ -15,7 +15,7 @@ def run():
     config['extend'] = datamap.get('syndic', {}).get('sls_extend', {})
 
     # State salt_syndic_pkgs
-    if len(datamap['syndic']['pkgs']) > 0:
+    if datamap['syndic']['pkgs']:
         attrs = [
             {'pkgs': datamap['syndic']['pkgs']},
             {'require_in': [{'service': 'salt_syndic_service'}]},
